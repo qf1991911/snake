@@ -10,13 +10,10 @@ function Scene1:ctor()
 		layer2:align(display.CENTER, display.cx, display.cy)
 		layer2:addTo(self)
 
-	local num1 = display.sizeInPixels.width
-	local num2 = display.sizeInPixels.height
-
 	local spriteBorder = {}
-		for i=1, display.width*3/64 do
+		for i=1, 40 do
 			spriteBorder[i] = {}
-			for j=1, display.height/16 do
+			for j=1, 40 do
 				if ((i == 1 or i == 40) or (j == 1 or j == 40)) then
 					spriteBorder[i][j] = display.newSprite("Border.png")
 						:align(display.CENTER, i*16-8, j*16-8)
@@ -57,7 +54,7 @@ function Scene1:ctor()
 	local spriteSnake = {}
 		for i=1, n do
 			spriteSnake[i] = display.newSprite("snake.png")
-				:align(display.CENTER, display.cx/3 - i*16 - 8, display.cy - 8)
+				:align(display.CENTER, display.height/2 - i*16 - 8, display.cy - 8)
 				:addTo(layer2)
 		end
 
@@ -78,7 +75,7 @@ function Scene1:ctor()
 	function gameOver()
 		local check = false
 		local snakePosX1, snakePosY1 = spriteSnake[1]:getPosition()
-		if (snakePosX1 == 8 or snakePosX1 == 632) or (snakePosY1 == 8 or snakePosY1 == 632) then
+		if (snakePosX1 == 8 or snakePosX1 == display.height-8) or (snakePosY1 == 8 or snakePosY1 == display.height-8) then
 		 	check = true
 		end 
 		local snakeHead = cc.p(spriteSnake[1]:getPosition())
